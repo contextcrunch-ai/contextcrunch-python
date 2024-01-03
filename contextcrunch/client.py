@@ -27,9 +27,11 @@ class ContextCrunchClient:
         if compression_ratio <= 0 or compression_ratio >= 1 :
             raise Exception("Compression ratio must be between 0 and 1 (exclusive)")
         body = {
-            "context": context,
-            "prompt": prompt,
-            "compression_ratio": compression_ratio
+            "input": {
+                "context": context,
+                "prompt": prompt,
+                "compression_ratio": compression_ratio
+            }
         }
         result = self._request("call", body)
         return result['output']
