@@ -23,7 +23,7 @@ class ContextCrunchClient:
             raise Exception(f"Error making request to {request_url}: {e}")
             
     
-    def compress_prompt(self, context: List[str], prompt: str, compression_ratio=0.9):
+    def compress(self, context: List[str], prompt: str, compression_ratio=0.9):
         if compression_ratio <= 0 or compression_ratio >= 1 :
             raise Exception("Compression ratio must be between 0 and 1 (exclusive)")
         body = {
