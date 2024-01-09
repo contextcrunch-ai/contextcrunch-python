@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 import requests
 
@@ -23,16 +23,21 @@ class ContextCrunchClient:
             raise Exception(f"Error making request to {request_url}: {e}")
             
     
-    def compress(self, context: List[str], prompt: str, compression_ratio=0.9):
-        if compression_ratio <= 0 or compression_ratio >= 1 :
-            raise Exception("Compression ratio must be between 0 and 1 (exclusive)")
+    def compress(self, context: List[str], prompt: str, compression_ratio=0.9, type: Optional[str] = 'rag', concat_prompt = False):
+        if compression_ratio < 0.5 or compression_ratio > 0.999 :
+            raise Exception("Compression ratio must be between 0.5 and 0.999")
+        if type not in ['rag', 'conversation']:
+            raise Exception("Type must be either 'rag' or 'conversation'")
         body = {
             "input": {
                 "context": context,
                 "prompt": prompt,
-                "compression_ratio": compression_ratio
+                "compression_ratio": compression_ratio,
+                "type": type
             }
         }
         result = self._request("call", body)
+        if concat_prompt:
+            return f'{result["output"]}\n\n{prompt}'
         return result['output']
         
