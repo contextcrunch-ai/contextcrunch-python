@@ -2,8 +2,8 @@
 Use the [ContextCrunch API](https://contextcrunch.com) easily with python!
 
 ## Prerequsites
-You need an API key from [https://contextcrunch.com/console/keys](https://contextcrunch.com/console/keys)
-
+- You need an API key from [https://contextcrunch.com/console/keys](https://contextcrunch.com/console/keys)
+- Install contextcrunch with `pip install contextcrunch`
 ## Quick Start
 ```python
 from contextcrunch import ContextCrunchClient
