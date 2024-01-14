@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import requests
 
@@ -18,12 +18,14 @@ class ContextCrunchClient:
         request_url = f"{self.url}/{endpoint}"
         try:
             response = requests.post(request_url, headers=header, json=data)
+            if response.status_code == 401:
+                raise Exception("Invalid API key")
             return response.json()
         except Exception as e:
             raise Exception(f"Error making request to {request_url}: {e}")
             
     
-    def compress(self, context: List[str], prompt: str, compression_ratio=0.9, type: Optional[str] = 'rag', concat_prompt = False):
+    def compress(self, context: List[str], prompt: str, compression_ratio=0.9, type: Optional[Literal['rag', 'conversation']] = 'rag', concat_prompt = False):
         if compression_ratio < 0.5 or compression_ratio > 0.999 :
             raise Exception("Compression ratio must be between 0.5 and 0.999")
         if type not in ['rag', 'conversation']:
