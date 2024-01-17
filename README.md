@@ -16,3 +16,12 @@ compressed = client.compress(
 )
 print(f'Although this text is too short to compress, we can see the API works! {compressed}')
 ```
+
+## Uploading to PyPi
+
+```bash
+python3 -m build
+python3 -m twine upload dist/*
+```
+
+Username: `__token__`

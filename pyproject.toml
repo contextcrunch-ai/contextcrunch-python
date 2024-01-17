@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "contextcrunch"
-version = "1.0.3"
+version = "1.0.4"
 authors = [{ name = "Matthew Kwiatkowski", email = "matt@mkcodes.ca" }]
 description = "Access to the ContextCrunch Prompt Compression API from Python"
 readme = "README.md"
